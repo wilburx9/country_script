@@ -9,13 +9,14 @@ void main() async {
 
   // Pick alpha_2 field from verboseList
   originalList.forEach((c) {
-    final obs = verboseList.firstWhere((e) => e["name"] == c["name"],
+    final found = verboseList.firstWhere((e) => e["name"] == c["name"],
         orElse: () => null);
-    if (obs != null) {
-      c["alpha_2"] = obs["alpha_2"];
+
+    if (found != null) {
+      c["alpha_2"] = found["alpha_2"];
       mergedList.add(c);
     } else {
-      print("Didn't ISO for  = ${c["name"]}");
+      print("Didn't find alpha_2 ISO for  = ${c["name"]}");
     }
   });
 
@@ -30,7 +31,7 @@ void main() async {
       final flag = f.firstWhere((t) => t.name == c["alpha_2"].toLowerCase(),
           orElse: () => null);
       if (flag == null) {
-        print("Didn't see flag for ${c["name"]}");
+        print("Didn't see flag for: ${c["name"]}");
       }
     });
 
@@ -40,7 +41,7 @@ void main() async {
       c.name == t["alpha_2"].toLowerCase(),
           orElse: () => null);
       if (flag == null) {
-        print("Not needed flag ${c.name}");
+        print("Not needed flag: ${c.name}");
       }
     });
     print("Total flags = ${f.length}");
