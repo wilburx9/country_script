@@ -1,0 +1,24 @@
+# Miscellaneous
+*.class
+*.lock
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/gradle.xml
+.idea/libraries
+/android/.idea/libraries
+/android/.idea/caches
+/android/.idea/gradle.xml
+
+# Visual Studio Code related
+.vscode/
