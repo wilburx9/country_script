@@ -16,7 +16,7 @@ void main() async {
       c["alpha_2"] = found["alpha_2"];
 
       // I don't need the languages and continent fields
-      c..remove("languages")..remove("continent");
+      c..remove("languages")..remove("continent")..remove("capital");
       mergedList.add(c);
     } else {
       print("Didn't find alpha_2 ISO for  = ${c["name"]}");
