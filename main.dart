@@ -23,7 +23,7 @@ void main() async {
   // Load flags directory
   final ds = Directory("./flags");
   if (ds.existsSync()) {
-    // A list of a files in the flags directory
+    // A list of all files in the flags directory
     final f = await ds.list().toList();
 
     // Checking that all flags we need are in the folder
