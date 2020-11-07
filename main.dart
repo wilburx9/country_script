@@ -14,6 +14,9 @@ void main() async {
 
     if (found != null) {
       c["alpha_2"] = found["alpha_2"];
+
+      // I don't need the languages field
+      c.remove("languages");
       mergedList.add(c);
     } else {
       print("Didn't find alpha_2 ISO for  = ${c["name"]}");
