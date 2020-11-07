@@ -1,1 +1,5 @@
-<svg viewBox="0 0 30 18" xmlns="http://www.w3.org/2000/svg"><path d="m0 0h30v18h-30z" fill="#ce1126"/><path d="m0 0 20.824734 18h9.175266l-20.824734-18z" fill="#fff"/><path d="m1.52921 0 20.824735 18h6.116844l-20.824734-18z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 18">
+<rect fill="#CE1126" width="30" height="18"/>
+<polygon fill="#FFF" points="0,0 20.824734,18 30,18 9.175266,0"/>
+<polygon points="1.52921,0 22.353945,18 28.470789,18 7.646055,0"/>
+</svg>

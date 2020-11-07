@@ -2,24 +2,31 @@ import 'dart:convert';
 import 'dart:io';
 
 void main() async {
-  final s = List<Map<String, dynamic>>();
-  final cs = jj.keys.map((e) => jj[e]).toList();
-  cs.forEach((c) {
-    final obs = ff.firstWhere((e) => e["name"] == c["name"],
+  // A list that contains originalList and some field in verboseList
+  final mergedList = List<Map<String, dynamic>>();
+  final originalList = rawOriginalList.keys.map((e) => rawOriginalList[e])
+      .toList();
+
+  // Pick alpha_2 field from verboseList
+  originalList.forEach((c) {
+    final obs = verboseList.firstWhere((e) => e["name"] == c["name"],
         orElse: () => null);
     if (obs != null) {
       c["alpha_2"] = obs["alpha_2"];
-      s.add(c);
+      mergedList.add(c);
     } else {
       print("Didn't ISO for  = ${c["name"]}");
     }
   });
 
+  // Load flags directory
   final ds = Directory("./flags");
   if (ds.existsSync()) {
+    // A list of a files in the flags directory
     final f = await ds.list().toList();
 
-    s.forEach((c) {
+    // Checking that all flags we need are in the folder
+    mergedList.forEach((c) {
       final flag = f.firstWhere((t) => t.name == c["alpha_2"].toLowerCase(),
           orElse: () => null);
       if (flag == null) {
@@ -27,8 +34,10 @@ void main() async {
       }
     });
 
+    // Checking for flags we don't need
     f.forEach((c) {
-      final flag = s.firstWhere((t) => c.name == t["alpha_2"].toLowerCase(),
+      final flag = mergedList.firstWhere((t) =>
+      c.name == t["alpha_2"].toLowerCase(),
           orElse: () => null);
       if (flag == null) {
         print("Not needed flag ${c.name}");
@@ -39,19 +48,28 @@ void main() async {
     print("Flags directory not found");
   }
 
-  print("Main List = ${cs.length}");
-  print("ISO List = ${ff.length}");
-  print("Merged List = ${s.length}");
-  //print(jsonEncode(s));
+  print("Original List = ${originalList.length}");
+  print("Verbose List = ${verboseList.length}");
+  print("Merged List = ${mergedList.length}");
+
+  // Print json
+  print(jsonEncode(mergedList));
 }
 
 extension FileExtention on FileSystemEntity{
+  // Grab just the file name without the extension and path
   String get name {
-    return this?.path?.split("/")?.last?.split(".").first;
+    return this?.path
+        ?.split("/")
+        ?.last
+        ?.split(".")
+        .first;
   }
 }
 
-final ff = [
+
+// Too verbose, contains a lot of uneeded data
+final verboseList = [
   {
     "alpha_2": "AD",
     "alpha_3": "AND",
@@ -5346,7 +5364,8 @@ final ff = [
   }
 ];
 
-final jj = {
+// Contains some data I need
+final rawOriginalList = {
   "AD": {
     "name": "Andorra",
     "native": "Andorra",
